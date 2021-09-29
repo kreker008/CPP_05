@@ -1,25 +1,35 @@
 #include <iostream>
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include "iostream"
 
 int main()
+try
 {
-	try
-	{
-		Bureaucrat br1("Karl", 149);
-		Bureaucrat br2("Jane", 2);
+	Bureaucrat Karl("Karl", 149);
+	Bureaucrat Jane("Jane", 2);
+	Form f("frm", 50, 1);
 
-		std::cout << br1 << br2;
-		br1.decrGrade();
-		br2.incGrade();
+	std::cout << Karl << Jane;
+	f.beSigned(Jane);
+	f.beSigned(Karl);
+	std::cout << std::endl;
 
-		std::cout << br1 << br2;
-		br1.decrGrade();
-		br2.incGrade();
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "invalid grade" << std::cout;
-	}
-	return 0;
+	Jane.incGrade();
+	Karl.incGrade();
+
+	std::cout << Karl << Jane << std::endl;
+	Jane.signForm(f);
+	Karl.signForm(f);
+
+	Jane.incGrade();
+	return (0);
+}
+catch (std::exception& e)
+{
+	e.what();
+}
+catch (...)
+{
+	std::cout << "UB" << std::endl;
 }

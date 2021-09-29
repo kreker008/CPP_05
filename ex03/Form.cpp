@@ -3,11 +3,11 @@
 /*
  *  Constructor
  */
-Form::Form(const std::string& name, const unsigned int exec, const unsigned int sign)
-try : name(name), SignGrade(sign), ExecGrade(exec), isSigned(false)
+Form::Form(const std::string& name, const unsigned int check, const unsigned int sign)
+try : name(name), SignGrade(sign), ExecGrade(check), isSigned(false)
 {
-	if (exec > 150 || sign > 150) throw Form::GradeTooHighException("Invalid Rating Data");
-	if (exec == 0 || sign == 0) throw Form::GradeTooLowException("Invalid Rating Data");
+	if (check > 150 || sign > 150) throw Form::GradeTooHighException("Invalid Rating Data");
+	if (check == 0 || sign == 0) throw Form::GradeTooLowException("Invalid Rating Data");
 }
 catch (std::exception& e)
 {
@@ -17,15 +17,6 @@ catch (std::exception& e)
 Form::Form(const Form &f) : name(f.name), SignGrade(f.SignGrade),
 							ExecGrade(f.ExecGrade), isSigned(f.isSigned)
 {}
-
-/*
- *  Operator overlord
- */
-Form& Form::operator=(const Form& f)
-{
-	(void )f;
-	return (*this);
-}
 
 /*
  *  Func-member
@@ -64,11 +55,21 @@ void Form::beSigned(Bureaucrat& br)
 	}
 }
 
-
-Form::~Form()
-{}
-
-
+bool 	Form::execute(Bureaucrat& executor)
+{
+	try
+	{
+		if(isSigned == false) throw GradeTooLowException("This form is not sign");
+		if(executor.getGrade() > ExecGrade) throw GradeTooLowException("Bureaucrat has low grade mark");
+		do_it();
+		return (true);
+	}
+	catch(const std::exception& e)
+	{
+		e.what();
+		return (false);
+	}
+}
 
 
 

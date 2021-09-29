@@ -50,17 +50,26 @@
  void Bureaucrat::signForm(Form& f)
  try
  {
- 	if (f.getSignGrade() < grade) throw GradeTooLowException(name + " cannot sign " + f.getName() + " because need more grade");
- 	if (f.getisSigned() == false)
- 	{
- 		f.beSigned(*this);
- 		std::cout << name << " signs " << f.getName()<< std::endl;
- 	}
- 	else throw GradeTooLowException(name + " form has already been signed ");
+	if (f.getSignGrade() < grade) throw GradeTooLowException(name + " cannot sign " + f.getName() + " because need more grade");
+	if (f.getisSigned() == false)
+	{
+		f.beSigned(*this);
+		std::cout << name << " signs " << f.getName()<< std::endl;
+	}
+	else throw GradeTooLowException(name + " form has already been signed ");
  }
- catch (std::exception& e)
+catch (std::exception& e)
+{
+	e.what();
+}
+
+
+ void	Bureaucrat::executeForm(Form& form)
  {
- 	e.what();
+ 	if (form.execute(*this) == true)
+ 		std::cout << name << " execute " << form.getName() << std::endl;
+ 	else
+ 		std::cout << "Error: " << name << " can't execute " << form.getName() << std::endl;
  }
 
  const std::string& Bureaucrat::getName() const

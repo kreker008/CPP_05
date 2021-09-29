@@ -1,40 +1,49 @@
 #include "Bureaucrat.hpp"
 
+ //Bureaucrat
 /*
  *  Constructor
  */
-Bureaucrat::Bureaucrat(const std::string &name, const int grade) : name(name), grade(grade)
+Bureaucrat::Bureaucrat(const std::string &name, const int grade)
+try : name(name), grade(grade)
 {
-	if (grade > 150 || grade == 0)	throw std::exception();
+	if (grade > 150) throw GradeTooHighException("Invalid Rating Data");
+	if (grade == 0) throw GradeTooLowException("Invalid Rating Data");
+}
+catch (std::exception& e)
+{
+	e.what();
 }
 
+Bureaucrat::Bureaucrat(const Bureaucrat& br) : name(br.name), grade(br.grade)
+{}
 
 /*
  *  Func-member
  */
-void	Bureaucrat::incGrade()
+void	Bureaucrat::incGrade() throw(GradeTooLowException())
 {
 	try
 	{
-		if (grade <= 1) throw std::exception();
+		if (grade <= 1) throw GradeTooLowException("The limit of the smallest grade has been reached");
 		--grade;
 	}
-	catch (std::exception & e)
+	catch (std::exception& e)
 	{
-		GradeTooHighException();
+		e.what();
 	}
 }
 
-void	Bureaucrat::decrGrade()
+void	Bureaucrat::decrGrade() throw(GradeTooLowException())
 {
 	try
 	{
-		if (grade >= 150) throw std::exception();
+		if (grade >= 150) throw GradeTooLowException("The limit of the highest grade has been reached");
 		++grade;
 	}
-	catch (std::exception & e)
+	catch (std::exception& e)
 	{
-		GradeTooLowException();
+		e.what();
 	}
 }
 
@@ -48,16 +57,53 @@ const unsigned int& Bureaucrat::getGrade() const
 	return (grade);
 }
 
-void Bureaucrat::GradeTooHighException()
+/*
+ *  Operator overlord
+ */
+Bureaucrat& Bureaucrat::operator=(const Bureaucrat& br)
 {
-	std::cout << "The limit of the highest grade has been reached" << std::endl;
+	if (this == &br)
+		return (*this);
+	grade = br.grade;
+	return (*this);
 }
 
-void Bureaucrat::GradeTooLowException()
+Bureaucrat::~Bureaucrat()
+{}
+
+
+
+ //Bureaucrat :: GradeTooHighException
+Bureaucrat::GradeTooHighException::GradeTooHighException(const std::string& str)
+: message(str){}
+
+const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
-	std::cout << "The limit of the smallest grade has been reached" << std::endl;
+	std::cout << message << std::endl;
+	return (NULL);
 }
 
+Bureaucrat::GradeTooHighException::~GradeTooHighException() throw()
+{}
+
+
+
+//Bureaucrat :: GradeTooLowException
+Bureaucrat::GradeTooLowException::GradeTooLowException(const std::string& str)
+: message(str){}
+
+const char* Bureaucrat::GradeTooLowException::what() const throw()
+{
+	std::cout << message << std::endl;
+	return (NULL);
+}
+
+Bureaucrat::GradeTooLowException::~GradeTooLowException() throw()
+{}
+
+
+
+// None class
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& obj)
 {
 	os << obj.getName() << ", bureaucrat grade " << obj.getGrade() << std::endl;

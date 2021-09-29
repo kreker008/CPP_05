@@ -1,18 +1,21 @@
-#ifndef BUREAUCRAT_HPP
-#define BUREAUCRAT_HPP
+#ifndef FORM_HPP
+#define FORM_HPP
 
 #include "string"
-#include "iostream"
+#include "Bureaucrat.hpp"
 
-class Bureaucrat
+class Bureaucrat;
+
+class Form
 {
 public:
 	class GradeTooHighException : public std::exception
 	{
 	public:
 		GradeTooHighException(const std::string&);
-		virtual const char * what() const throw();
+		virtual const char* what() const throw();
 		~GradeTooHighException() throw(); // Не компилится без этого throw()
+
 	private:
 		std::string message;
 	};
@@ -21,38 +24,44 @@ public:
 	{
 	public:
 		GradeTooLowException(const std::string&);
-		virtual const char * what() const throw();
+		virtual const char* what() const throw();
 		~GradeTooLowException() throw(); // Не компилится без этого throw()
+
 	private:
 		std::string message;
 	};
-
 	/*
 	 *  Constructor
 	 */
-	Bureaucrat(const std::string& name, const int grade);
-	Bureaucrat(const Bureaucrat&);
-
+	Form(const std::string&, const unsigned int, const unsigned int);
+	Form(const Form&);
 
 	/*
 	 *  Func-member
 	 */
-	const std::string& getName() const;
-	const unsigned int& getGrade() const;
-	void incGrade() throw(GradeTooLowException());
-	void decrGrade() throw(GradeTooLowException());
+	const unsigned int& getSignGrade() const;
+	const unsigned int&	getCheckGrade() const;
+	const std::string&	getName() const;
+	const bool&			getisSigned() const;
+	void				beSigned(Bureaucrat& br);
+	bool 				execute(Bureaucrat& executor);
+
+private:
+	/*
+	 *  Func-member
+	 */
+	virtual void	do_it() const = 0;
 
 	/*
 	 *  Operator overlord
 	 */
 	Bureaucrat& operator=(const Bureaucrat&);
 
-	~Bureaucrat();
-private:
 	const std::string	name;
-	unsigned int		grade;
+	const unsigned int 	SignGrade;
+	const unsigned int 	ExecGrade;
+	bool 				isSigned;
 };
 
-std::ostream& operator<<(std::ostream& os, const Bureaucrat& obj);
 
 #endif

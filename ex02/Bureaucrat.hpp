@@ -3,6 +3,9 @@
 
 #include "string"
 #include "iostream"
+#include "Form.hpp"
+
+class Form;
 
 class Bureaucrat
 {
@@ -21,7 +24,7 @@ public:
 	{
 	public:
 		GradeTooLowException(const std::string&);
-		virtual const char * what() const throw();
+		virtual const char*	what() const throw();
 		~GradeTooLowException() throw(); // Не компилится без этого throw()
 	private:
 		std::string message;
@@ -37,10 +40,12 @@ public:
 	/*
 	 *  Func-member
 	 */
-	const std::string& getName() const;
-	const unsigned int& getGrade() const;
-	void incGrade() throw(GradeTooLowException());
-	void decrGrade() throw(GradeTooLowException());
+	const std::string&	getName() const;
+	const unsigned int&	getGrade() const;
+	void				incGrade() throw(GradeTooLowException());
+	void				decrGrade() throw(GradeTooLowException());
+	void 				signForm(Form& f);
+	void				executeForm(Form& form);
 
 	/*
 	 *  Operator overlord

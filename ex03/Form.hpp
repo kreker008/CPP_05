@@ -37,6 +37,11 @@ public:
 	Form(const Form&);
 
 	/*
+	 * Operator overlord
+	 */
+	Form&	operator=(const Form&);
+
+	/*
 	 *  Func-member
 	 */
 	const unsigned int& getSignGrade() const;
@@ -44,14 +49,14 @@ public:
 	const std::string&	getName() const;
 	const bool&			getisSigned() const;
 	void				beSigned(Bureaucrat& br);
+	bool 				execute(Bureaucrat& executor);
 
 
-	~Form();
 private:
 	/*
-	 *  Operator overlord
+	 *  Func-member
 	 */
-	Form& operator=(const Form&);
+	virtual void	do_it() const = 0;
 
 	const std::string	name;
 	const unsigned int 	SignGrade;
