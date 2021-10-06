@@ -11,9 +11,7 @@ try : name(name), grade(grade)
 	if (grade == 0) throw GradeTooLowException("Invalid Rating Data");
 }
 catch (std::exception& e)
-{
-	e.what();
-}
+{}
 
 Bureaucrat::Bureaucrat(const Bureaucrat& br) : name(br.name), grade(br.grade)
 {}
@@ -22,29 +20,25 @@ Bureaucrat::Bureaucrat(const Bureaucrat& br) : name(br.name), grade(br.grade)
  *  Func-member
  */
 void	Bureaucrat::incGrade() throw(GradeTooLowException())
+try
 {
-	try
-	{
-		if (grade <= 1) throw GradeTooLowException("The limit of the smallest grade has been reached");
-		--grade;
-	}
-	catch (std::exception& e)
-	{
-		e.what();
-	}
+	if (grade <= 1) throw GradeTooLowException("The limit of the smallest grade has been reached");
+	--grade;
+}
+catch (std::exception& e)
+{
+	e.what();
 }
 
 void	Bureaucrat::decrGrade() throw(GradeTooLowException())
+try
 {
-	try
-	{
-		if (grade >= 150) throw GradeTooLowException("The limit of the highest grade has been reached");
-		++grade;
-	}
-	catch (std::exception& e)
-	{
-		e.what();
-	}
+	if (grade >= 150) throw GradeTooLowException("The limit of the highest grade has been reached");
+	++grade;
+}
+catch (std::exception& e)
+{
+	e.what();
 }
 
 const std::string& Bureaucrat::getName() const
@@ -60,11 +54,9 @@ const unsigned int& Bureaucrat::getGrade() const
 /*
  *  Operator overlord
  */
-Bureaucrat& Bureaucrat::operator=(const Bureaucrat& br)
+Bureaucrat& Bureaucrat::operator=(const Bureaucrat& br) //useless func-member
 {
-	if (this == &br)
-		return (*this);
-	grade = br.grade;
+	(void)br;
 	return (*this);
 }
 

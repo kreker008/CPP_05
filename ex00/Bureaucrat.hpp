@@ -33,22 +33,21 @@ public:
 	Bureaucrat(const std::string& name, const int grade);
 	Bureaucrat(const Bureaucrat&);
 
-
 	/*
 	 *  Func-member
 	 */
-	const std::string& getName() const;
-	const unsigned int& getGrade() const;
-	void incGrade() throw(GradeTooLowException());
-	void decrGrade() throw(GradeTooLowException());
+	const std::string&	getName() const;
+	const unsigned int&	getGrade() const;
+	void				incGrade() throw(GradeTooLowException());
+	void				decrGrade() throw(GradeTooLowException());
 
+	~Bureaucrat();
+private:
 	/*
 	 *  Operator overlord
 	 */
 	Bureaucrat& operator=(const Bureaucrat&);
 
-	~Bureaucrat();
-private:
 	const std::string	name;
 	unsigned int		grade;
 };

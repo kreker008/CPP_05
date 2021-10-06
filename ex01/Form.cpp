@@ -10,9 +10,7 @@ try : name(name), SignGrade(sign), ExecGrade(exec), isSigned(false)
 	if (exec == 0 || sign == 0) throw Form::GradeTooLowException("Invalid Rating Data");
 }
 catch (std::exception& e)
-{
-	throw;
-}
+{}
 
 Form::Form(const Form &f) : name(f.name), SignGrade(f.SignGrade),
 							ExecGrade(f.ExecGrade), isSigned(f.isSigned)
@@ -51,25 +49,20 @@ const bool&			Form::getisSigned() const
 }
 
 void Form::beSigned(Bureaucrat& br)
+try
 {
-	try
-	{
-		if (isSigned == true) throw GradeTooLowException(name + " form has already been signed ");
-		if (br.getGrade() > SignGrade) throw GradeTooLowException(br.getName() + " cannot sign " + getName() + " because need more grade");
-		isSigned = true;
-	}
-	catch (std::exception& e)
-	{
-		e.what();
-	}
+	if (isSigned == true) throw GradeTooLowException(name + " form has already been signed ");
+	if (br.getGrade() > SignGrade) throw GradeTooLowException(br.getName() + " cannot sign " + getName() + " because need more grade");
+	isSigned = true;
+}
+catch (std::exception& e)
+{
+	e.what();
 }
 
 
 Form::~Form()
 {}
-
-
-
 
 
 //Bureaucrat :: GradeTooHighException

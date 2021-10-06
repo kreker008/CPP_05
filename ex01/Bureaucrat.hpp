@@ -46,13 +46,13 @@ public:
 	void				decrGrade() throw(GradeTooLowException());
 	void 				signForm(Form& f);
 
+	~Bureaucrat();
+private:
 	/*
 	 *  Operator overlord
 	 */
 	Bureaucrat& operator=(const Bureaucrat&);
 
-	~Bureaucrat();
-private:
 	const std::string	name;
 	unsigned int		grade;
 };
