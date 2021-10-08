@@ -47,13 +47,13 @@ public:
 	void 				signForm(Form& f);
 	void				executeForm(Form& form);
 
+	~Bureaucrat();
+private:
 	/*
 	 *  Operator overlord
 	 */
 	Bureaucrat& operator=(const Bureaucrat&);
 
-	~Bureaucrat();
-private:
 	const std::string	name;
 	unsigned int		grade;
 };

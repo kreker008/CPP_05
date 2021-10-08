@@ -1,12 +1,12 @@
-PROGRAM_NAME		=	ex01
+PROGRAM_NAME		=	ex03
 
 HDR_PATH			=	.
 SRC_PATH			=	.
 
-SRC					=	Bureaucrat.cpp Form.cpp PresidentialPardonForm.cpp  \
+SRC					=	Bureaucrat.cpp Form.cpp PresidentialPardonForm.cpp Intern.cpp\
 						RobotomyRequestForm.cpp ShrubberyCreationForm.cpp main.cpp
 
-HDR					=	Bureaucrat.hpp Form.hpp PresidentialPardonForm.hpp \
+HDR					=	Bureaucrat.hpp Form.hpp PresidentialPardonForm.hpp Intern.hpp\
 						RobotomyRequestForm.hpp	ShrubberyCreationForm.hpp
 
 OBJ					=	${SRC:%.cpp=%.o}

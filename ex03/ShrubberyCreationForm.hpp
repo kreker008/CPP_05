@@ -19,7 +19,7 @@ public:
 	 */
 	ShrubberyCreationForm& operator=(const ShrubberyCreationForm&);
 
-	~ShrubberyCreationForm();
+	virtual ~ShrubberyCreationForm();
 private:
 	/*
 	 *  Func-member

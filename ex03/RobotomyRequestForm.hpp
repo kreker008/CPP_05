@@ -18,7 +18,7 @@ public:
 	 */
 	RobotomyRequestForm& operator=(const RobotomyRequestForm&);
 
-	~RobotomyRequestForm();
+	virtual ~RobotomyRequestForm();
 private:
 	/*
 	 *  Func-member

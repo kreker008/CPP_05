@@ -22,30 +22,26 @@
   *  Func-member
   */
  void	Bureaucrat::incGrade() throw(GradeTooLowException())
- {
- 	try
- 	{
- 		if (grade <= 1) throw GradeTooLowException("The limit of the smallest grade has been reached");
- 		--grade;
- 	}
- 	catch (std::exception& e)
- 	{
- 		e.what();
- 	}
- }
+try
+{
+	if (grade <= 1) throw GradeTooLowException("The limit of the smallest grade has been reached");
+	--grade;
+}
+catch (std::exception& e)
+{
+	e.what();
+}
 
  void	Bureaucrat::decrGrade() throw(GradeTooLowException())
- {
- 	try
- 	{
- 		if (grade >= 150) throw GradeTooLowException("The limit of the highest grade has been reached");
- 		++grade;
- 	}
- 	catch (std::exception& e)
- 	{
- 		e.what();
- 	}
- }
+try
+{
+	if (grade >= 150) throw GradeTooLowException("The limit of the highest grade has been reached");
+	++grade;
+}
+catch (std::exception& e)
+{
+	e.what();
+}
 
  void Bureaucrat::signForm(Form& f)
  try
@@ -87,9 +83,7 @@ catch (std::exception& e)
   */
  Bureaucrat& Bureaucrat::operator=(const Bureaucrat& br)
 {
-	if (this == &br)
-		return (*this);
-	grade = br.grade;
+	(void) br;
 	return (*this);
 }
 

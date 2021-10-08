@@ -1,4 +1,4 @@
-PROGRAM_NAME		=	ex01
+PROGRAM_NAME		=	ex02
 
 HDR_PATH			=	.
 SRC_PATH			=	.

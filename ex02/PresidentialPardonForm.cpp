@@ -26,8 +26,6 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
  */
 void PresidentialPardonForm::do_it() const
 {
-	srand((unsigned int)time (NULL));
-
 	std::cout << getName() << " has been pardoned by Zafod Beeblebrox" << std::endl;
 }
 

@@ -14,7 +14,7 @@ public:
 	public:
 		GradeTooHighException(const std::string&);
 		virtual const char* what() const throw();
-		~GradeTooHighException() throw(); // Не компилится без этого throw()
+		~GradeTooHighException() throw(); // Не компилится без throw()
 
 	private:
 		std::string message;
@@ -25,7 +25,7 @@ public:
 	public:
 		GradeTooLowException(const std::string&);
 		virtual const char* what() const throw();
-		~GradeTooLowException() throw(); // Не компилится без этого throw()
+		~GradeTooLowException() throw(); // Не компилится без throw()
 
 	private:
 		std::string message;
@@ -37,26 +37,26 @@ public:
 	Form(const Form&);
 
 	/*
-	 * Operator overlord
-	 */
-	Form&	operator=(const Form&);
-
-	/*
 	 *  Func-member
 	 */
 	const unsigned int& getSignGrade() const;
-	const unsigned int&	getCheckGrade() const;
+	const unsigned int&	getExecGrade() const;
 	const std::string&	getName() const;
 	const bool&			getisSigned() const;
 	void				beSigned(Bureaucrat& br);
 	bool 				execute(Bureaucrat& executor);
 
-
+	virtual ~Form();
 private:
 	/*
 	 *  Func-member
 	 */
 	virtual void	do_it() const = 0;
+
+	/*
+	 *  Operator overlord
+	 */
+	Form& operator=(const Form&);
 
 	const std::string	name;
 	const unsigned int 	SignGrade;

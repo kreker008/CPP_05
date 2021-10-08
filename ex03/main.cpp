@@ -5,27 +5,31 @@
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "iostream"
+#include "Intern.hpp"
 
 int main()
 try
 {
-	Bureaucrat Karl("Karl", 50);
-	Form *fr = new RobotomyRequestForm("T-800"); // sign 72, exec 45
-	Form *fs = new ShrubberyCreationForm("home"); // sign 145, exec 137
-	Form *fp = new PresidentialPardonForm("Edvard"); // sign 25, exec 5
+	Bureaucrat Karl("Karl", 1);
+	Intern Lui;
+	Form * pf = Lui.makeForm("presidential pardon", "ANN presidential");
+	Form * sf = Lui.makeForm("shrubbery creation", "ANN shrubbery");
+	Form * rf = Lui.makeForm("robotomy request", "ANN robotomy");
 
-	//fr->beSigned(Karl);
-	Karl.signForm(*fr);
-	Karl.executeForm(*fr);
-	std::cout << std::endl;
+	Lui.makeForm("HAHAH", "HAHAH");
 
-	fs->beSigned(Karl);
-	Karl.executeForm(*fs);
-	std::cout << std::endl;
+	Karl.signForm(*pf);
+	Karl.executeForm(*pf);
 
-	Karl.signForm(*fp);
-	Karl.executeForm(*fp);
+	Karl.signForm(*sf);
+	Karl.executeForm(*sf);
 
+	Karl.signForm(*rf);
+	Karl.executeForm(*rf);
+
+	delete pf;
+	delete sf;
+	delete rf;
 	return (0);
 }
 catch (std::exception& e)

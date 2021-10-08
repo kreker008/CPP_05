@@ -3,7 +3,7 @@
 /*
  * Constructor
  */
-RobotomyRequestForm::RobotomyRequestForm(const std::string& name) : Form(name, 145, 137)
+RobotomyRequestForm::RobotomyRequestForm(const std::string& name) : Form(name, 72, 45)
 {}
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& shf)

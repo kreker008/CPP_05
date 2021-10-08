@@ -18,7 +18,7 @@ public:
 	 */
 	PresidentialPardonForm& operator=(const PresidentialPardonForm&);
 
-	~PresidentialPardonForm();
+	virtual ~PresidentialPardonForm();
 private:
 	/*
 	 *  Func-member
